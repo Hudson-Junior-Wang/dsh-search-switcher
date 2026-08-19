@@ -1,0 +1,56 @@
+{
+  "name": "dsh-search-switcher",
+  "version": "0.1.0",
+  "description": "One-click web search-engine switcher beside the DeepSeek Harness model picker.",
+  "type": "module",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "web-search",
+    "search-engine",
+    "composer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hudson-Junior-Wang/dsh-search-switcher.git"
+  },
+  "homepage": "https://github.com/Hudson-Junior-Wang/dsh-search-switcher",
+  "bugs": {
+    "url": "https://github.com/Hudson-Junior-Wang/dsh-search-switcher/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "dsh-free-search": ">=0.4.7"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-runtime"
+      ],
+      "platform": "web"
+    }
+  }
+}

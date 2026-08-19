@@ -1,0 +1,4 @@
+# Load the plugin entry when this package is installed as a DSH bundle.
+- insert:
+    - id: dsh-search-switcher
+      name: dsh-search-switcher
