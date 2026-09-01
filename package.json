@@ -1,6 +1,6 @@
 {
   "name": "dsh-search-switcher",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "One-click web search-engine switcher beside the DeepSeek Harness model picker.",
   "type": "module",
   "license": "MIT",

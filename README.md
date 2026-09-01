@@ -32,6 +32,21 @@ A compact web-search-engine switcher for the DeepSeek Harness composer. It rende
 
 The switcher only changes the preferred provider. It does not bypass provider authentication, API-key requirements, or network restrictions.
 
+### Compatibility with `dsh-free-search` 0.4.22
+
+`dsh-free-search` 0.4.22 registers its settings namespace through the `SettingsProvider.installSection()` method, which only exists in `@deepseek-ai/dsh-settings >= 0.1.2-alpha.2`. On older harness runtimes (DSH Desktop 0.7.1 bundles `0.1.2-alpha.1`; any `dsh` before alpha.2) that registration throws and is contained by Cordis, so the `free-search` namespace is never exposed: the settings bridge answers `/describe` with an empty `namespaces` list and `/mutate` with `settings-not-exposed`. The switcher then cannot read or write the provider — since v0.3.0 the menu shows that exact diagnosis instead of a generic "switch failed".
+
+| `dsh-free-search` | Harness `dsh-settings <= 0.1.2-alpha.1` | Harness `dsh-settings >= 0.1.2-alpha.2` |
+| --- | --- | --- |
+| `<= 0.4.21` | ✅ works | ❌ fails to load (`installSettingsSection` removed) |
+| `0.4.22` | ❌ settings-not-exposed | ✅ works |
+
+Fix options:
+
+1. **Upgrade DSH Desktop / the harness runtime** to a build bundling `@deepseek-ai/dsh-settings >= 0.1.2-alpha.2` (preferred — `dsh-free-search` 0.4.22 works there as-is).
+2. On the old runtime, **patch the installed `dsh-free-search` 0.4.22** locally: replace its `sctx.settings.installSection(...)` block with the exported `installSettingsSection(ctx, ...)` helper (identical semantics, present in the old runtime). The exact two-line diff is in the bug report on [DDDMUC/dsh-free-search](https://github.com/DDDMUC/dsh-free-search/issues) — please report it there so upstream ships a version compatible with both runtimes.
+3. Or pin `dsh-free-search` at `0.4.21` or older while staying on the old runtime.
+
 ### Blocked-network use case
 
 Overseas university and campus networks often block `api.deepseek.com`, which makes the DeepSeek Official provider unavailable while the rest of the harness keeps working. This switcher exists so you can fall back to Bing, DuckDuckGo, SearXNG, or another reachable provider in one click — no Settings page, no provider editing by hand.
