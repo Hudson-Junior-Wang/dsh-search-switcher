@@ -30,7 +30,11 @@ A compact web-search-engine switcher for the DeepSeek Harness composer. It rende
 - DeepSeek Harness Web profile with Node.js 20 or newer.
 - [`dsh-free-search`](https://github.com/DDDMUC/dsh-free-search) `>=0.4.7`, which owns the settings bridge and the search provider.
 
-The switcher only changes the preferred provider. It does not bypass provider authentication, API-key requirements, or network restrictions. On networks that block `api.deepseek.com`, use Bing, DuckDuckGo, SearXNG, or another reachable provider instead of DeepSeek Official.
+The switcher only changes the preferred provider. It does not bypass provider authentication, API-key requirements, or network restrictions.
+
+### Blocked-network use case
+
+Overseas university and campus networks often block `api.deepseek.com`, which makes the DeepSeek Official provider unavailable while the rest of the harness keeps working. This switcher exists so you can fall back to Bing, DuckDuckGo, SearXNG, or another reachable provider in one click — no Settings page, no provider editing by hand.
 
 ## Screenshots
 
