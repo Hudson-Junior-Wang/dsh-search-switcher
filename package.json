@@ -52,5 +52,9 @@
       ],
       "platform": "web"
     }
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/client.js",
+    "test": "node test/smoke.test.mjs"
   }
 }
