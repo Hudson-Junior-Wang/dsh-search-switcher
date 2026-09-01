@@ -48,6 +48,22 @@ const client = readFileSync(join(root, "lib/client.js"), "utf8");
 check(/exports\.apply\s*=/.test(client), "lib/client.js must export `apply`");
 check(/exports\.inject\s*=/.test(client), "lib/client.js must export `inject`");
 
+// The engine list and the README must not drift: every engine in the bundle
+// should be named in the README, and the README's "ten engines" claim has to
+// match the actual count.
+const enginesBlock = client.match(/const ENGINES = \[([\s\S]*?)\];/)?.[1] ?? "";
+const engineIds = [...enginesBlock.matchAll(/id: "([^"]+)"/g)].map((m) => m[1]);
+check(engineIds.length >= 1, "could not parse engine ids from lib/client.js");
+if (engineIds.length >= 1) {
+  const readme = readFileSync(join(root, "README.md"), "utf8");
+  const countWords = { 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten" };
+  const word = countWords[engineIds.length] ?? String(engineIds.length);
+  check(
+    readme.includes(`${word} engines`),
+    `README should state that the plugin supports ${word} engines (found ${engineIds.length})`,
+  );
+}
+
 for (const file of ["lib/client.js", "lib/index.js"]) {
   try {
     execFileSync(process.execPath, ["--check", join(root, file)], {
