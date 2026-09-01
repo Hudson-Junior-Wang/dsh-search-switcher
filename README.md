@@ -22,7 +22,8 @@ A compact web-search-engine switcher for the DeepSeek Harness composer. It rende
   - Keenable
   - Perplexity
   - DeepSeek Official
-- Uses the Harness theme variables and supports keyboard escape/outside-click dismissal.
+- Uses the Harness theme variables.
+- Full keyboard support: Arrow keys open the menu from the trigger and move between engines, Home/End jump to the first/last entry, Enter/Space activate, Escape dismisses and returns focus to the trigger.
 
 ## Requirements
 
@@ -62,8 +63,8 @@ If the profile already contains a manually inserted `dsh-search-switcher` entry,
 ## Development
 
 ```bash
-node --check lib/client.js
-node --check lib/index.js
+npm test          # bundle smoke test (manifest, patch, syntax)
+npm run check     # node --check on both lib files
 ```
 
 The client bundle is intentionally a self-contained ModuleLoader bundle so it can be served by the Harness client-module system without a separate build step.
