@@ -32,6 +32,14 @@ A compact web-search-engine switcher for the DeepSeek Harness composer. It rende
 
 The switcher only changes the preferred provider. It does not bypass provider authentication, API-key requirements, or network restrictions. On networks that block `api.deepseek.com`, use Bing, DuckDuckGo, SearXNG, or another reachable provider instead of DeepSeek Official.
 
+## Screenshots
+
+The trigger beside the model picker, and the open engine menu:
+
+![Trigger](assets/screenshot-trigger.png)
+
+![Engine menu](assets/screenshot-menu.png)
+
 ## Install
 
 Using the Harness plugin CLI:
